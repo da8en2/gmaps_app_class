@@ -1,0 +1,30 @@
+$(document).ready(function (){
+
+    function initialize() {
+      var myCoords = new google.maps.LatLng(40.712405, -74.006614);
+
+      var mapOptions = {
+        center: myCoords,
+        zoom: 15,
+        scrollwheel: false
+      };
+      var image = {
+        url: "<%= asset_path 'lion_icon.png'%>",
+        scaledSize: new google.maps.Size(50,50)
+      }
+      var marker = new google.maps.Marker({
+        position: myCoords,
+        map: map,
+        title: 'Hello World',
+        animation: google.maps.Animation.DROP,
+        icon: image
+      });
+
+      var map = new google.maps.Map(document.getElementById('destination-map'),
+                mapOptions);
+
+      marker.setMap(map);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+});
