@@ -19,31 +19,42 @@
 
 $(document).ready(function (){
 
-    function initialize() {
-      var myCoords = new google.maps.LatLng(40.712405, -74.006614);
+function initialize() {
 
-      var mapOptions = {
-        center: myCoords,
-        zoom: 15,
-        scrollwheel: false
-      };
-      var image = {
-        url: "<%= asset_path 'lion_icon.png'%>",
-        scaledSize: new google.maps.Size(50,50)
-      }
-      var marker = new google.maps.Marker({
-        position: myCoords,
-        map: map,
-        title: 'Hello World',
-        animation: google.maps.Animation.DROP,
-        icon: image
-      });
+    // Create an array of sites
+	var sites = [
+	  ['Machu Picchu', -13.163047, -72.544566, 4],
+	  ['Temple of the 3 Windows', -13.163726, -72.544881, 5],
+	  ['House of the Guardian to the Funerary Rock', -13.165398, -72.544624, 3],
+	  ['Sacred Rock', -13.161846, -72.546104, 2],
+	  ['Intihuatana', -13.163439, -72.546732, 1]
+	];
 
-      var map = new google.maps.Map(document.getElementById('map-canvas'),
-                mapOptions);
+	var mapOptions = {
+	  zoom: 15,
+	  scrollwheel: false,
+	  center: new google.maps.LatLng(-13.163081, -72.545200)
+	}
 
-      marker.setMap(map);
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var image = {
+      url: "<%= asset_path 'lion_icon.png'%>",
+      scaledSize: new google.maps.Size(50,50)
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+	// Loop over all sites and display marker images
+    var marker, i;
+
+    for (i = 0; i < sites.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(sites[i][1], sites[i][2]),
+        map: map,
+        icon: image
+      });
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
 });
