@@ -5,6 +5,8 @@
 <table>
   <thead>
     <tr>
+      <th>Latitude</th>
+      <th>Longitude</th>
       <th>City</th>
       <th>Country</th>
       <th colspan="3"></th>
@@ -14,6 +16,8 @@
   <tbody>
     <% @destinations.each do |destination| %>
       <tr>
+        <td><%= destination.latitude %></td>
+        <td><%= destination.longitude %></td>
         <td><%= destination.city %></td>
         <td><%= destination.country %></td>
         <td><%= link_to 'Show', destination %></td>
